@@ -1,4 +1,5 @@
 import 'package:cpb/src/auth/auth_controller.dart';
+import 'package:cpb/src/auth/views/forgot_password_screen.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:cpb/widgets/custom_async_btn.dart';
 import 'package:cpb/widgets/custom_text_field.dart';
@@ -58,13 +59,16 @@ class LogInScreen extends StatelessWidget {
                   isShowSuffixIcon: true,
                 ),
                 const SizedBox(height: 6.0),
-                Text(
-                  'Forgot Password',
-                  style: kBodyStyle.copyWith(
-                    color: Colors.black54,
-                    decoration: TextDecoration.underline,
+                InkWell(
+                  onTap: () => Get.toNamed(ForgotPasswordScreen.routeName),
+                  child: Text(
+                    'Forgot Password',
+                    style: kBodyStyle.copyWith(
+                      color: Colors.black54,
+                      decoration: TextDecoration.underline,
+                    ),
+                    textAlign: TextAlign.right,
                   ),
-                  textAlign: TextAlign.right,
                 ),
                 const SizedBox(height: 18.0),
                 CustomAsyncBtn(

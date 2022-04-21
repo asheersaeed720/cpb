@@ -17,38 +17,43 @@ class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Forgot password'),
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black87),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage('assets/images/get_started_bg.jpg'),
+          ),
+        ),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Form(
             key: _formKey,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: GetBuilder<AuthController>(
-                builder: (_) => Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/images/forgot_pw.png', width: 182.0),
-                    const SizedBox(height: 18.0),
-                    Text('Password reset!', style: kTitleStyle),
-                    const Text('This action will send password at your email.'),
-                    const SizedBox(height: 18.0),
-                    const CustomTextField(
-                      hintText: 'Email',
-                      isEmail: true,
-                    ),
-                    const SizedBox(height: 18.0),
-                    CustomAsyncBtn(
-                      btntxt: 'Submit',
-                      onPress: () {},
-                    )
-                  ],
-                ),
+            child: GetBuilder<AuthController>(
+              builder: (_) => Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset('assets/images/ic_launcher.png', width: 130.0),
+                  const SizedBox(height: 18.0),
+                  Text(
+                    'Reset Password',
+                    style: kTitleStyle,
+                  ),
+                  const Text(
+                    'This action will send password at your email.',
+                  ),
+                  const SizedBox(height: 18.0),
+                  const CustomTextField(
+                    prefixIcon: Icons.email,
+                    hintText: 'Email',
+                    isEmail: true,
+                  ),
+                  const SizedBox(height: 18.0),
+                  CustomAsyncBtn(
+                    btntxt: 'SEND CODE',
+                    onPress: () {},
+                  )
+                ],
               ),
             ),
           ),
