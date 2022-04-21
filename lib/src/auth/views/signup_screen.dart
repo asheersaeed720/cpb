@@ -1,5 +1,4 @@
 import 'package:cpb/src/auth/auth_controller.dart';
-import 'package:cpb/src/auth/widgets/header_widget.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:cpb/widgets/custom_async_btn.dart';
 import 'package:cpb/widgets/custom_text_field.dart';
@@ -24,7 +23,6 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: [
-          const HeaderWidget(isSignUpScreen: true),
           Padding(
             padding: const EdgeInsets.all(24.0),
             child: Form(

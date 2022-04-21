@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-const kPrimaryColor = Color(0xFFD22027);
-const kSecondaryColor = Color(0xFF253241);
-
-const Color textFieldColor = Color.fromARGB(255, 238, 236, 237);
+const kPrimaryColor = Color(0xFFA7C957);
+const kSecondaryColor = Color(0xFF6A994E);
+const textFieldBg = Color(0xFFaff43f);
 
 TextStyle kTitleStyle = const TextStyle(
-  color: kSecondaryColor,
+  color: Colors.black,
   fontWeight: FontWeight.bold,
   fontSize: 19.0,
 );

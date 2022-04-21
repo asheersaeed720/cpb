@@ -30,7 +30,7 @@ class CustomAsyncBtn extends StatelessWidget {
               style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 16.0,
-                color: Colors.white,
+                color: Colors.black87,
               ),
             )
           : Row(
@@ -59,8 +59,9 @@ class CustomAsyncBtn extends StatelessWidget {
           child: ElevatedButton(
             child: child,
             style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all(btnColor ?? Theme.of(context).primaryColor),
+              backgroundColor: MaterialStateProperty.all(
+                btnColor ?? Colors.white.withOpacity(0.9),
+              ),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(borderRadius),

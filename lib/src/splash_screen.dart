@@ -1,4 +1,4 @@
-import 'package:cpb/src/auth/views/login_screen.dart';
+import 'package:cpb/src/get_started_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => LogInScreen(),
+            builder: (context) => const GetStartedScreen(),
           ),
         );
       },
@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Image.asset('assets/images/splash_screen.png', fit: BoxFit.cover),
+        child: Image.asset('assets/images/splash.png', fit: BoxFit.cover),
       ),
     );
   }

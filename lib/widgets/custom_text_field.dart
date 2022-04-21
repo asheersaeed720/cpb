@@ -84,7 +84,7 @@ class CustomTextField extends StatelessWidget {
             return !emailValid ? "Enter Valid Email" : null;
           } else if (isPassword) {
             if (value!.isEmpty) {
-              return 'Required';
+              return 'Required Field';
             } else if (value.length < 6) {
               return 'Password must be atleast 6 characters';
             }
@@ -116,8 +116,13 @@ class CustomTextField extends StatelessWidget {
                   padding: EdgeInsetsDirectional.only(start: 8.0),
                   child: SizedBox.shrink(),
                 )
-              : Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              : Container(
+                  padding: const EdgeInsets.all(8.0),
+                  margin: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(6.0),
+                  ),
                   child: Icon(prefixIcon, size: 22.0),
                 ),
           suffixIcon: isShowSuffixIcon
