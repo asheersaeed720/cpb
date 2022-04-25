@@ -1,12 +1,13 @@
 import 'package:cpb/src/auth/views/login_screen.dart';
+import 'package:cpb/src/auth/views/signup_screen.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LogInProviderScreen extends StatelessWidget {
-  static const String routeName = '/login-provider';
+class AuthProvidersScreen extends StatelessWidget {
+  static const String routeName = '/auth-providers';
 
-  LogInProviderScreen({Key? key}) : super(key: key);
+  AuthProvidersScreen({Key? key}) : super(key: key);
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -64,19 +65,24 @@ class LogInProviderScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24.0),
                 Center(
-                  child: RichText(
-                    text: TextSpan(
-                      text: "Haven't Register Yet? ",
-                      style: kBodyStyle.copyWith(fontFamily: 'Poppins'),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Register Yourself',
-                          style: kBodyStyle.copyWith(
-                            color: Colors.blue,
-                            decoration: TextDecoration.underline,
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(SignUpScreen.routeName);
+                    },
+                    child: RichText(
+                      text: TextSpan(
+                        text: "Haven't Register Yet? ",
+                        style: kBodyStyle.copyWith(fontFamily: 'Poppins'),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Register Yourself',
+                            style: kBodyStyle.copyWith(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 )
@@ -117,7 +123,7 @@ class LogInProviderScreen extends StatelessWidget {
             const SizedBox(width: 10.0),
             Text(
               text,
-              style: kBodyStyle.copyWith(),
+              style: kBodyStyle,
               textAlign: TextAlign.center,
             ),
           ],

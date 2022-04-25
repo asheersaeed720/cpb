@@ -171,6 +171,7 @@ class CustomTextFieldWithOutIcon extends StatelessWidget {
   final Function? onSubmit;
   final bool isEnabled;
   final bool isEmail;
+  final double borderRadius;
   final bool isRequired;
 
   final TextCapitalization capitalization;
@@ -201,6 +202,7 @@ class CustomTextFieldWithOutIcon extends StatelessWidget {
     this.prefixIconUrl,
     this.isSearch = false,
     this.isRequired = false,
+    this.borderRadius = 50,
     this.required = true,
   }) : super(key: key);
 
@@ -247,9 +249,10 @@ class CustomTextFieldWithOutIcon extends StatelessWidget {
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 22.0),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(borderRadius),
             borderSide: const BorderSide(style: BorderStyle.none, width: 0),
           ),
+          fillColor: Colors.white,
           isDense: true,
           hintText: hintText,
           suffixIcon: isShowSuffixIcon

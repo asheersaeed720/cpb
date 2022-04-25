@@ -21,68 +21,158 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 2.0),
-                    child: Text('Create an Account', style: kTitleStyle),
-                  ),
-                  const SizedBox(height: 6.0),
-                  Image.asset('assets/images/divider.jpg', width: 100.0),
-                  const SizedBox(height: 18.0),
-                  CustomTextField(
-                    controller: _nameController,
-                    prefixIcon: Icons.person,
-                    hintText: 'Name',
-                  ),
-                  const SizedBox(height: 12.0),
-                  CustomTextField(
-                    controller: _emailController,
-                    prefixIcon: Icons.email,
-                    hintText: 'Email',
-                    isEmail: true,
-                  ),
-                  const SizedBox(height: 12.0),
-                  CustomTextField(
-                    controller: _passwordController,
-                    prefixIcon: Icons.lock,
-                    hintText: 'Password',
-                    isPassword: true,
-                    isShowSuffixIcon: true,
-                  ),
-                  const SizedBox(height: 12.0),
-                  CustomAsyncBtn(
-                    btntxt: 'SIGN UP NOW',
-                    onPress: () async {
-                      if (_formKey.currentState!.validate()) {
-                        _formKey.currentState!.save();
-                        FocusScopeNode currentFocus = FocusScope.of(context);
-                        if (!currentFocus.hasPrimaryFocus) {
-                          currentFocus.unfocus();
-                        }
-                        // bool isAuth = await _authController.handleSignUp(
-                        //   name: _nameController.text,
-                        //   email: _emailController.text,
-                        //   password: _passwordController.text,
-                        // );
-                        // if (isAuth) {
-                        //   Get.offAllNamed(TabScreen.routeName);
-                        // }
-                      }
-                    },
-                  ),
-                ],
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage('assets/images/get_started_bg.jpg'),
+          ),
+        ),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            padding: const EdgeInsets.only(top: 70.0, left: 16.0, right: 16.0),
+            children: [
+              Text(
+                'Create Account',
+                style: kTitleStyle,
+                textAlign: TextAlign.center,
               ),
+              const SizedBox(height: 20.0),
+              Container(
+                padding: const EdgeInsets.all(12.0),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'First Name*',
+                      style: kBodyStyle,
+                    ),
+                    const SizedBox(height: 8.0),
+                    const CustomTextFieldWithOutIcon(
+                      hintText: '',
+                    ),
+                    const SizedBox(height: 8.0),
+                    Text(
+                      'Last Name*',
+                      style: kBodyStyle,
+                    ),
+                    const SizedBox(height: 8.0),
+                    const CustomTextFieldWithOutIcon(
+                      hintText: '',
+                    ),
+                    const SizedBox(height: 8.0),
+                    Text(
+                      'Email',
+                      style: kBodyStyle,
+                    ),
+                    const SizedBox(height: 8.0),
+                    const CustomTextFieldWithOutIcon(
+                      hintText: '',
+                      isEmail: true,
+                    ),
+                    const SizedBox(height: 8.0),
+                    Text(
+                      'Password',
+                      style: kBodyStyle,
+                    ),
+                    const SizedBox(height: 8.0),
+                    const CustomTextFieldWithOutIcon(
+                      hintText: '',
+                      isPassword: true,
+                    ),
+                    const SizedBox(height: 8.0),
+                    Text(
+                      'Confirm Password',
+                      style: kBodyStyle,
+                    ),
+                    const SizedBox(height: 8.0),
+                    const CustomTextFieldWithOutIcon(
+                      hintText: '',
+                      isPassword: true,
+                    ),
+                    const SizedBox(height: 36.0),
+                    CustomAsyncBtn(
+                      btntxt: 'CREATE ACCOUNT',
+                      onPress: () {},
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 32.0),
+              SizedBox(
+                height: 50.0,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    elevation: MaterialStateProperty.all<double?>(0.0),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32.0),
+                      ),
+                    ),
+                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) => kSecondaryColor,
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Row(
+                    children: [
+                      const Icon(Icons.money, color: Colors.white),
+                      const SizedBox(width: 8.0),
+                      Text(
+                        'Donate To CPB',
+                        style: kBodyStyle.copyWith(color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBtnView(String imgPath, String text, Function()? onPress) {
+    return SizedBox(
+      height: 62.0,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          elevation: MaterialStateProperty.all<double?>(0.0),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
             ),
           ),
-        ],
+          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) => textFieldBg,
+          ),
+        ),
+        onPressed: onPress,
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(6.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Image.asset(imgPath, width: 34.0),
+            ),
+            const SizedBox(width: 10.0),
+            Text(
+              text,
+              style: kBodyStyle,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

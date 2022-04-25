@@ -1,4 +1,4 @@
-import 'package:cpb/src/auth/views/login_provider_screen.dart';
+import 'package:cpb/src/auth/views/auth_providers_screen.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -77,7 +77,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
                           (Set<MaterialState> states) => Colors.white70,
                         ),
                       ),
-                      onPressed: () => Get.toNamed(LogInProviderScreen.routeName),
+                      onPressed: () => Get.toNamed(AuthProvidersScreen.routeName),
                       child: Text(
                         'ACCEPT',
                         style: kBodyStyle,

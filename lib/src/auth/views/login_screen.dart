@@ -1,5 +1,7 @@
+import 'dart:ui';
+
 import 'package:cpb/src/auth/auth_controller.dart';
-import 'package:cpb/src/auth/views/forgot_password_screen.dart';
+import 'package:cpb/src/donation_screen.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:cpb/widgets/custom_async_btn.dart';
 import 'package:cpb/widgets/custom_text_field.dart';
@@ -60,7 +62,7 @@ class LogInScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 6.0),
                 InkWell(
-                  onTap: () => Get.toNamed(ForgotPasswordScreen.routeName),
+                  onTap: () => createTripBottomSheet(context),
                   child: Text(
                     'Forgot Password',
                     style: kBodyStyle.copyWith(
@@ -105,7 +107,7 @@ class LogInScreen extends StatelessWidget {
                         (Set<MaterialState> states) => kSecondaryColor,
                       ),
                     ),
-                    onPressed: () => Get.toNamed(LogInScreen.routeName),
+                    onPressed: () => Get.toNamed(DonationScreen.routeName),
                     child: Row(
                       children: [
                         const Icon(Icons.money, color: Colors.white),
@@ -124,6 +126,79 @@ class LogInScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  createTripBottomSheet(context) {
+    final _formKey = GlobalKey<FormState>();
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(12),
+          topLeft: Radius.circular(12),
+        ),
+      ),
+      isScrollControlled: true,
+      context: context,
+      builder: (builder) {
+        return Container(
+          // filter: ImageFilter.blur(sigmaX: 30.0, sigmaY: 30.0),
+          padding: const EdgeInsets.only(top: 30.0, bottom: 40.0, right: 16.0, left: 16.0),
+          decoration: const BoxDecoration(
+            color: kSecondaryColor,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(12),
+              topLeft: Radius.circular(12),
+            ),
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                kSecondaryColor,
+                kPrimaryColor,
+              ],
+            ),
+          ),
+          height: MediaQuery.of(context).size.height * 0.7,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              // Container(
+              //   width: 62.0,
+              //   decoration: const BoxDecoration(
+              //     border: Border(
+              //       bottom: BorderSide(width: 4.0, color: Colors.grey),
+              //     ),
+              //   ),
+              // ),
+              Center(
+                child: Text(
+                  'Reset Password',
+                  style: kTitleStyle.copyWith(color: Colors.white),
+                ),
+              ),
+              const SizedBox(height: 32),
+              Text(
+                'EMAIL',
+                style: kBodyStyle.copyWith(color: Colors.white),
+              ),
+              const SizedBox(height: 8),
+              const CustomTextFieldWithOutIcon(
+                hintText: 'Enter email here',
+                borderRadius: 8.0,
+                isEmail: true,
+              ),
+              const SizedBox(height: 10.0),
+              const Spacer(),
+              CustomAsyncBtn(
+                btntxt: 'SEND CODE',
+                onPress: () {},
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
