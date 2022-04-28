@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cpb/src/auth/auth_controller.dart';
 import 'package:cpb/src/donation_screen.dart';
+import 'package:cpb/src/home/home_screen.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:cpb/widgets/custom_async_btn.dart';
 import 'package:cpb/widgets/custom_text_field.dart';
@@ -76,7 +77,7 @@ class LogInScreen extends StatelessWidget {
                 CustomAsyncBtn(
                   btntxt: 'LOGIN',
                   onPress: () async {
-                    // if (_formKey.currentState!.validate()) {
+                    Get.toNamed(HomeScreen.routeName); // if (_formKey.currentState!.validate()) {
                     //   _formKey.currentState!.save();
                     //   FocusScopeNode currentFocus = FocusScope.of(context);
                     //   if (!currentFocus.hasPrimaryFocus) {

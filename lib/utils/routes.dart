@@ -4,6 +4,7 @@ import 'package:cpb/src/auth/views/login_screen.dart';
 import 'package:cpb/src/auth/views/signup_screen.dart';
 import 'package:cpb/src/donation_screen.dart';
 import 'package:cpb/src/get_started_screen.dart';
+import 'package:cpb/src/home/home_screen.dart';
 import 'package:cpb/src/splash_screen.dart';
 import 'package:cpb/src/terms_conditions_screen.dart';
 import 'package:get/get.dart';
@@ -40,5 +41,9 @@ final List<GetPage<dynamic>> routes = [
   GetPage(
     name: DonationScreen.routeName,
     page: () => const DonationScreen(),
+  ),
+  GetPage(
+    name: HomeScreen.routeName,
+    page: () => const HomeScreen(),
   ),
 ];
