@@ -1,4 +1,4 @@
-import 'package:cpb/src/library/library_screen.dart';
+import 'package:cpb/src/get_started_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,12 +17,11 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 2),
       () {
         Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => LibraryScreen()),
+          MaterialPageRoute(builder: (context) => const GetStartedScreen()),
           (Route<dynamic> route) => false,
         );
       },
     );
-
     super.initState();
   }
 

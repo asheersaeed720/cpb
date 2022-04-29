@@ -1,14 +1,27 @@
 import 'package:cpb/src/home/home_screen.dart';
 import 'package:cpb/src/library/library_screen.dart';
+import 'package:cpb/src/note/note_screen.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TabController extends GetxController {
   int selectedIndex = 2;
+  String title = 'Home';
 
   onItemTapped(int index) {
     selectedIndex = index;
+    if (index == 0) {
+      title = 'Bible';
+    } else if (index == 1) {
+      title = 'Notes';
+    } else if (index == 2) {
+      title = 'Home';
+    } else if (index == 3) {
+      title = 'Split';
+    } else {
+      title = 'Brower';
+    }
     update();
   }
 }
@@ -22,7 +35,7 @@ class TabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[
       const HomeScreen(),
-      const HomeScreen(),
+      NoteScreen(),
       const HomeScreen(),
       const HomeScreen(),
       const HomeScreen(),
@@ -34,7 +47,7 @@ class TabScreen extends StatelessWidget {
         init: TabController(),
         builder: (tabController) => Scaffold(
           appBar: AppBar(
-            title: const Text('Home'),
+            title: Text(tabController.title),
             iconTheme: const IconThemeData(color: kPrimaryColor),
             actions: const [
               Padding(
@@ -154,8 +167,8 @@ class TabScreen extends StatelessWidget {
                 style: kBodyStyle.copyWith(color: Colors.white),
               ),
               onTap: () {
-                Get.toNamed(LibraryScreen.routeName);
                 Get.back();
+                Get.toNamed(LibraryScreen.routeName);
               },
             ),
             const Divider(color: Colors.white),
