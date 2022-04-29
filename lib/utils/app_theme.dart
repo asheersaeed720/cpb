@@ -16,6 +16,7 @@ final lightThemeData = ThemeData(
     elevation: 0,
     backgroundColor: Colors.white,
   ),
+  iconTheme: const IconThemeData(color: Colors.black87),
   inputDecorationTheme: const InputDecorationTheme(
     fillColor: textFieldBg,
     filled: true,

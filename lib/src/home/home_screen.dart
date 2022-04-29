@@ -2,15 +2,13 @@ import 'package:cpb/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  static const String routeName = '/home';
-
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: const EdgeInsets.only(top: 28.0, right: 14.0, left: 14.0),
+        padding: const EdgeInsets.only(right: 14.0, left: 14.0),
         children: [
           _buildHomeSliderView(),
           const SizedBox(height: 10.0),
