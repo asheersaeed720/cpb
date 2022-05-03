@@ -3,9 +3,11 @@ import 'package:cpb/src/auth/views/email_verification_screen.dart';
 import 'package:cpb/src/auth/views/forgot_password_screen.dart';
 import 'package:cpb/src/auth/views/login_screen.dart';
 import 'package:cpb/src/auth/views/signup_screen.dart';
+import 'package:cpb/src/bible/bible_detail_screen.dart';
 import 'package:cpb/src/donation_screen.dart';
 import 'package:cpb/src/get_started_screen.dart';
 import 'package:cpb/src/library/library_screen.dart';
+import 'package:cpb/src/notification/notification_screen.dart';
 import 'package:cpb/src/splash_screen.dart';
 import 'package:cpb/src/tab_screen.dart';
 import 'package:cpb/src/terms_conditions_screen.dart';
@@ -55,5 +57,13 @@ final List<GetPage<dynamic>> routes = [
   GetPage(
     name: EmailVerificationScreen.routeName,
     page: () => const EmailVerificationScreen(),
+  ),
+  GetPage(
+    name: BibleDetailScreen.routeName,
+    page: () => const BibleDetailScreen(),
+  ),
+  GetPage(
+    name: NotificationScreen.routeName,
+    page: () => const NotificationScreen(),
   ),
 ];

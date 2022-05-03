@@ -1,7 +1,9 @@
 import 'package:cpb/src/auth/auth_controller.dart';
+import 'package:cpb/src/bible/bible_screen.dart';
 import 'package:cpb/src/home/home_screen.dart';
 import 'package:cpb/src/library/library_screen.dart';
 import 'package:cpb/src/note/note_screen.dart';
+import 'package:cpb/src/notification/notification_screen.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,7 +37,7 @@ class TabScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[
-      const HomeScreen(),
+      const BibleScreen(),
       NoteScreen(),
       const HomeScreen(),
       const HomeScreen(),
@@ -47,16 +49,19 @@ class TabScreen extends StatelessWidget {
       child: GetBuilder<TabController>(
         init: TabController(),
         builder: (tabController) => Scaffold(
-          appBar: AppBar(
-            title: Text(tabController.title),
-            iconTheme: const IconThemeData(color: kPrimaryColor),
-            actions: const [
-              Padding(
-                padding: EdgeInsets.only(right: 18.0),
-                child: Icon(Icons.alarm_rounded),
-              ),
-            ],
-          ),
+          backgroundColor: Colors.white,
+          appBar: tabController.title == 'Bible'
+              ? _buildBibleSearchBarView(context)
+              : AppBar(
+                  title: Text(tabController.title),
+                  iconTheme: const IconThemeData(color: kPrimaryColor),
+                  actions: const [
+                    Padding(
+                      padding: EdgeInsets.only(right: 18.0),
+                      child: Icon(Icons.alarm_rounded),
+                    ),
+                  ],
+                ),
           drawer: _buildDrawerView(),
           body: _widgetOptions.elementAt(tabController.selectedIndex),
           bottomNavigationBar: BottomNavigationBar(
@@ -101,9 +106,7 @@ class TabScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              // Color(0xFFa6d44f),
               kPrimaryColor,
-              // Color(0xFF719e4f),
               kSecondaryColor,
             ],
           ),
@@ -250,6 +253,46 @@ class TabScreen extends StatelessWidget {
               },
             ),
             const Divider(color: Colors.white),
+          ],
+        ),
+      ),
+    );
+  }
+
+  dynamic _buildBibleSearchBarView(BuildContext context) {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(90.0),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 20.0, right: 16.0),
+        child: AppBar(
+          titleSpacing: 0.0,
+          iconTheme: const IconThemeData(color: Colors.black),
+          elevation: 0.0,
+          title: TextFormField(
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 22.0),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(32.0),
+                borderSide: const BorderSide(width: 1),
+              ),
+              fillColor: Colors.white,
+              filled: true,
+              isDense: true,
+              hintText: 'Search',
+              prefixIcon: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child: Icon(Icons.search, size: 22.0),
+              ),
+            ),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: InkWell(
+                onTap: () => Get.toNamed(NotificationScreen.routeName),
+                child: const Icon(Icons.notifications_none_outlined),
+              ),
+            ),
           ],
         ),
       ),
