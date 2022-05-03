@@ -1,4 +1,5 @@
 import 'package:cpb/src/auth/views/auth_providers_screen.dart';
+import 'package:cpb/src/auth/views/email_verification_screen.dart';
 import 'package:cpb/src/auth/views/forgot_password_screen.dart';
 import 'package:cpb/src/auth/views/login_screen.dart';
 import 'package:cpb/src/auth/views/signup_screen.dart';
@@ -50,5 +51,9 @@ final List<GetPage<dynamic>> routes = [
   GetPage(
     name: LibraryScreen.routeName,
     page: () => LibraryScreen(),
+  ),
+  GetPage(
+    name: EmailVerificationScreen.routeName,
+    page: () => const EmailVerificationScreen(),
   ),
 ];

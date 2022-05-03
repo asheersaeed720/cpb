@@ -1,3 +1,4 @@
+import 'package:cpb/src/auth/auth_controller.dart';
 import 'package:cpb/src/home/home_screen.dart';
 import 'package:cpb/src/library/library_screen.dart';
 import 'package:cpb/src/note/note_screen.dart';
@@ -245,7 +246,7 @@ class TabScreen extends StatelessWidget {
                 style: kBodyStyle.copyWith(color: Colors.white),
               ),
               onTap: () {
-                Get.back();
+                Get.find<AuthController>().logoutUser();
               },
             ),
             const Divider(color: Colors.white),

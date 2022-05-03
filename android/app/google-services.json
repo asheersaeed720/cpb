@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "392591495778",
+    "project_id": "cpb-app",
+    "storage_bucket": "cpb-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392591495778:android:ded7b329785d7c6991773b",
+        "android_client_info": {
+          "package_name": "com.restncode.cpb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392591495778-pnacpshvonpfl1rqutqrtc76870bbs0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo9p3fPc-_UT30BxJfNrH9hk2sVht97i4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392591495778-pnacpshvonpfl1rqutqrtc76870bbs0d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

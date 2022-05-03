@@ -1,11 +1,14 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:cpb/src/auth/auth_controller.dart';
+import 'package:cpb/src/auth/views/email_verification_screen.dart';
 import 'package:cpb/src/donation_screen.dart';
 import 'package:cpb/src/tab_screen.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:cpb/widgets/custom_async_btn.dart';
 import 'package:cpb/widgets/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -77,20 +80,25 @@ class LogInScreen extends StatelessWidget {
                 CustomAsyncBtn(
                   btntxt: 'LOGIN',
                   onPress: () async {
-                    Get.toNamed(TabScreen.routeName); // if (_formKey.currentState!.validate()) {
-                    //   _formKey.currentState!.save();
-                    //   FocusScopeNode currentFocus = FocusScope.of(context);
-                    //   if (!currentFocus.hasPrimaryFocus) {
-                    //     currentFocus.unfocus();
-                    //   }
-                    //   bool isAuth = await _authController.handleLogIn(
-                    //     email: _emailController.text,
-                    //     password: _passwordController.text,
-                    //   );
-                    //   if (isAuth) {
-                    //     Get.offNamed(TabScreen.routeName);
-                    //   }
-                    // }
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      FocusScopeNode currentFocus = FocusScope.of(context);
+                      if (!currentFocus.hasPrimaryFocus) {
+                        currentFocus.unfocus();
+                      }
+                      bool isAuth = await _authController.handleLogIn(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
+                      log('isAuth $isAuth');
+                      if (isAuth) {
+                        if (FirebaseAuth.instance.currentUser!.emailVerified) {
+                          Get.offNamed(TabScreen.routeName);
+                        } else {
+                          Get.toNamed(EmailVerificationScreen.routeName);
+                        }
+                      }
+                    }
                   },
                 ),
                 const SizedBox(height: 60.0),

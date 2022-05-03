@@ -1,4 +1,7 @@
+import 'package:cpb/src/auth/views/email_verification_screen.dart';
 import 'package:cpb/src/get_started_screen.dart';
+import 'package:cpb/src/tab_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,10 +19,25 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => const GetStartedScreen()),
-          (Route<dynamic> route) => false,
-        );
+        User? authUser = FirebaseAuth.instance.currentUser;
+        if (authUser != null) {
+          if (authUser.emailVerified) {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const TabScreen()),
+              (Route<dynamic> route) => false,
+            );
+          } else {
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const EmailVerificationScreen()),
+              (Route<dynamic> route) => false,
+            );
+          }
+        } else {
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const GetStartedScreen()),
+            (Route<dynamic> route) => false,
+          );
+        }
       },
     );
     super.initState();

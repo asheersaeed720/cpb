@@ -1,4 +1,5 @@
 import 'package:cpb/src/auth/auth_controller.dart';
+import 'package:cpb/src/auth/views/email_verification_screen.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:cpb/widgets/custom_async_btn.dart';
 import 'package:cpb/widgets/custom_text_field.dart';
@@ -14,7 +15,8 @@ class SignUpScreen extends StatelessWidget {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -53,7 +55,8 @@ class SignUpScreen extends StatelessWidget {
                       style: kBodyStyle,
                     ),
                     const SizedBox(height: 8.0),
-                    const CustomTextFieldWithOutIcon(
+                    CustomTextFieldWithOutIcon(
+                      controller: _firstNameController,
                       hintText: '',
                     ),
                     const SizedBox(height: 8.0),
@@ -62,7 +65,8 @@ class SignUpScreen extends StatelessWidget {
                       style: kBodyStyle,
                     ),
                     const SizedBox(height: 8.0),
-                    const CustomTextFieldWithOutIcon(
+                    CustomTextFieldWithOutIcon(
+                      controller: _lastNameController,
                       hintText: '',
                     ),
                     const SizedBox(height: 8.0),
@@ -71,7 +75,8 @@ class SignUpScreen extends StatelessWidget {
                       style: kBodyStyle,
                     ),
                     const SizedBox(height: 8.0),
-                    const CustomTextFieldWithOutIcon(
+                    CustomTextFieldWithOutIcon(
+                      controller: _emailController,
                       hintText: '',
                       isEmail: true,
                     ),
@@ -81,24 +86,42 @@ class SignUpScreen extends StatelessWidget {
                       style: kBodyStyle,
                     ),
                     const SizedBox(height: 8.0),
-                    const CustomTextFieldWithOutIcon(
+                    CustomTextFieldWithOutIcon(
+                      controller: _passwordController,
                       hintText: '',
                       isPassword: true,
                     ),
-                    const SizedBox(height: 8.0),
-                    Text(
-                      'Confirm Password',
-                      style: kBodyStyle,
-                    ),
-                    const SizedBox(height: 8.0),
-                    const CustomTextFieldWithOutIcon(
-                      hintText: '',
-                      isPassword: true,
-                    ),
+                    // const SizedBox(height: 8.0),
+                    // Text(
+                    //   'Confirm Password',
+                    //   style: kBodyStyle,
+                    // ),
+                    // const SizedBox(height: 8.0),
+                    // const CustomTextFieldWithOutIcon(
+                    //   hintText: '',
+                    //   isPassword: true,
+                    // ),
                     const SizedBox(height: 36.0),
                     CustomAsyncBtn(
                       btntxt: 'CREATE ACCOUNT',
-                      onPress: () {},
+                      onPress: () async {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          FocusScopeNode currentFocus = FocusScope.of(context);
+                          if (!currentFocus.hasPrimaryFocus) {
+                            currentFocus.unfocus();
+                          }
+                          bool isAuth = await _authController.handleSignUp(
+                            fname: _firstNameController.text,
+                            lname: _lastNameController.text,
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
+                          if (isAuth) {
+                            Get.toNamed(EmailVerificationScreen.routeName);
+                          }
+                        }
+                      },
                     ),
                   ],
                 ),

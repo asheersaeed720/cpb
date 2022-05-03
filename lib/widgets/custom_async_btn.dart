@@ -1,4 +1,5 @@
 import 'package:async_button_builder/async_button_builder.dart';
+import 'package:cpb/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomAsyncBtn extends StatelessWidget {
@@ -49,7 +50,7 @@ class CustomAsyncBtn extends StatelessWidget {
       loadingWidget: const SizedBox(
         height: 16.0,
         width: 16.0,
-        child: CircularProgressIndicator(color: Colors.white),
+        child: CircularProgressIndicator(color: kPrimaryColor),
       ),
       errorWidget: const Text('Error'),
       builder: (context, child, callback, _) {
