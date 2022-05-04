@@ -9,7 +9,7 @@ final lightThemeData = ThemeData(
   appBarTheme: const AppBarTheme(
     titleTextStyle: TextStyle(
       color: Colors.black87,
-      fontSize: 16.0,
+      fontSize: 15.0,
       fontFamily: 'Poppins',
       fontWeight: FontWeight.bold,
     ),

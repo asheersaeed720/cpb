@@ -4,6 +4,7 @@ import 'package:cpb/src/home/home_screen.dart';
 import 'package:cpb/src/library/library_screen.dart';
 import 'package:cpb/src/note/note_screen.dart';
 import 'package:cpb/src/notification/notification_screen.dart';
+import 'package:cpb/src/store/store_screen.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -184,6 +185,7 @@ class TabScreen extends StatelessWidget {
               ),
               onTap: () {
                 Get.back();
+                Get.toNamed(StoreScreen.routeName);
               },
             ),
             const Divider(color: Colors.white),

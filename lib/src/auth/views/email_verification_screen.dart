@@ -90,7 +90,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
 
   Future<void> checkEmailVerified() async {
     User? user = _auth.currentUser;
-    await _auth.currentUser!.reload();
+    await _auth.currentUser?.reload();
     if (user!.emailVerified) {
       timer!.cancel();
       Get.offAndToNamed(TabScreen.routeName);

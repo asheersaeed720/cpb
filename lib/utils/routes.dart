@@ -9,6 +9,7 @@ import 'package:cpb/src/get_started_screen.dart';
 import 'package:cpb/src/library/library_screen.dart';
 import 'package:cpb/src/notification/notification_screen.dart';
 import 'package:cpb/src/splash_screen.dart';
+import 'package:cpb/src/store/store_screen.dart';
 import 'package:cpb/src/tab_screen.dart';
 import 'package:cpb/src/terms_conditions_screen.dart';
 import 'package:get/get.dart';
@@ -65,5 +66,9 @@ final List<GetPage<dynamic>> routes = [
   GetPage(
     name: NotificationScreen.routeName,
     page: () => const NotificationScreen(),
+  ),
+  GetPage(
+    name: StoreScreen.routeName,
+    page: () => StoreScreen(),
   ),
 ];

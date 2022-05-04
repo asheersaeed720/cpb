@@ -44,11 +44,8 @@ class AuthService extends GetConnect {
         email: email,
         password: password,
       );
-      log('emailVerified ${userCredential.user!.emailVerified}');
       if (!userCredential.user!.emailVerified) {
-        await userCredential.user!.sendEmailVerification().catchError((e) {
-          log('e $e');
-        });
+        await userCredential.user!.sendEmailVerification();
       }
       return userCredential;
     } on FirebaseAuthException catch (e) {
