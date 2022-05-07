@@ -37,7 +37,9 @@ dependencies:
   url_launcher: ^6.1.0
   fluttertoast: ^8.0.8
   firebase_auth: ^3.3.11
+  google_sign_in: ^5.3.0
   firebase_core: ^1.13.1
+  loader_overlay: ^2.0.6
   carousel_slider: ^4.0.0
   cloud_firestore: ^3.1.10
   connectivity_plus: ^2.2.1

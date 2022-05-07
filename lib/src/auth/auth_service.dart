@@ -4,6 +4,7 @@ import 'package:cpb/utils/display_toast_message.dart';
 import 'package:cpb/utils/firebase_collections.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService extends GetConnect {
   Future<UserCredential?> signUpUser(
@@ -54,6 +55,29 @@ class AuthService extends GetConnect {
       } else if (e.code == 'wrong-password') {
         displayToastMessage('Wrong password provided for that user.');
       }
+    }
+    return null;
+  }
+
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      log('${e.message}');
+      displayToastMessage('${e.message}');
     }
     return null;
   }

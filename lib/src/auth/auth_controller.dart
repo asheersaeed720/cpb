@@ -8,6 +8,7 @@ import 'package:cpb/utils/display_toast_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends NetworkManager {
   final _authService = Get.find<AuthService>();
@@ -35,6 +36,20 @@ class AuthController extends NetworkManager {
     update();
   }
 
+  Future<bool> handleSignUp({
+    required String fname,
+    required String lname,
+    required String email,
+    required String password,
+  }) async {
+    if (connectionType != 0) {
+      return ((await _authService.signUpUser(fname, lname, email, password)) != null);
+    } else {
+      customSnackBar('Network error', 'Please try again later');
+      return false;
+    }
+  }
+
   Future<bool> handleLogIn({
     required String email,
     required String password,
@@ -47,14 +62,9 @@ class AuthController extends NetworkManager {
     }
   }
 
-  Future<bool> handleSignUp({
-    required String fname,
-    required String lname,
-    required String email,
-    required String password,
-  }) async {
+  Future<bool> handleGoogleAuth() async {
     if (connectionType != 0) {
-      return ((await _authService.signUpUser(fname, lname, email, password)) != null);
+      return ((await _authService.signInWithGoogle()) != null);
     } else {
       customSnackBar('Network error', 'Please try again later');
       return false;
@@ -86,6 +96,7 @@ class AuthController extends NetworkManager {
 
   logoutUser() async {
     await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
     _getStorage.remove('user');
     currentUserData = _getStorage.read('user') ?? {};
     update();

@@ -95,7 +95,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
                                 if (states.contains(MaterialState.disabled)) {
                                   return Colors.grey.shade400;
                                 }
-                                return Colors.white70;
+                                return Colors.white;
                               },
                             ),
                           ),

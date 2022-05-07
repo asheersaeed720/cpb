@@ -1,5 +1,7 @@
+import 'package:cpb/src/auth/auth_controller.dart';
 import 'package:cpb/src/auth/views/login_screen.dart';
 import 'package:cpb/src/auth/views/signup_screen.dart';
+import 'package:cpb/src/tab_screen.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,10 +48,19 @@ class AuthProvidersScreen extends StatelessWidget {
                   () => Get.toNamed(LogInScreen.routeName),
                 ),
                 const SizedBox(height: 14.0),
-                _buildBtnView(
-                  'assets/icons/google.png',
-                  'Login with Google',
-                  () {},
+                GetBuilder<AuthController>(
+                  builder: (authController) => _buildBtnView(
+                    'assets/icons/google.png',
+                    'Login with Google',
+                    () async {
+                      // loadingOverlay();
+                      bool isAuth = await authController.handleGoogleAuth();
+                      // Loader.hide();
+                      if (isAuth) {
+                        Get.offNamed(TabScreen.routeName);
+                      }
+                    },
+                  ),
                 ),
                 const SizedBox(height: 14.0),
                 _buildBtnView(
