@@ -3,7 +3,9 @@ import 'package:cpb/src/auth/views/login_screen.dart';
 import 'package:cpb/src/auth/views/signup_screen.dart';
 import 'package:cpb/src/tab_screen.dart';
 import 'package:cpb/utils/constants.dart';
+import 'package:cpb/widgets/loading_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:get/get.dart';
 
 class AuthProvidersScreen extends StatelessWidget {
@@ -53,9 +55,9 @@ class AuthProvidersScreen extends StatelessWidget {
                     'assets/icons/google.png',
                     'Login with Google',
                     () async {
-                      // loadingOverlay();
+                      loadingOverlay(context);
                       bool isAuth = await authController.handleGoogleAuth();
-                      // Loader.hide();
+                      Loader.hide();
                       if (isAuth) {
                         Get.offNamed(TabScreen.routeName);
                       }

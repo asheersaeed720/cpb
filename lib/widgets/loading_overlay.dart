@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
-import 'package:get/get.dart';
 
-loadingOverlay() {
+loadingOverlay(BuildContext context) {
   Loader.show(
-    Get.context!,
+    context,
     isAppbarOverlay: true,
-    isBottomBarOverlay: false,
+    isBottomBarOverlay: true,
     progressIndicator: const CircularProgressIndicator(),
     overlayColor: const Color(0x99E8EAF6),
   );

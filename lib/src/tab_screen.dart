@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:cpb/src/auth/auth_controller.dart';
-import 'package:cpb/src/bible/bible_screen.dart';
+import 'package:cpb/src/bible/views/bible_screen.dart';
 import 'package:cpb/src/home/home_screen.dart';
 import 'package:cpb/src/library/library_screen.dart';
 import 'package:cpb/src/note/note_screen.dart';
 import 'package:cpb/src/notification/notification_screen.dart';
+import 'package:cpb/src/split_bottom_sheet.dart';
 import 'package:cpb/src/store/store_screen.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -14,17 +17,23 @@ class TabController extends GetxController {
   String title = 'Home';
 
   onItemTapped(int index) {
-    selectedIndex = index;
+    log('index $index');
     if (index == 0) {
       title = 'Bible';
+      selectedIndex = index;
     } else if (index == 1) {
       title = 'Notes';
+      selectedIndex = index;
     } else if (index == 2) {
       title = 'Home';
+      selectedIndex = index;
     } else if (index == 3) {
-      title = 'Split';
+      // title = 'Split';
+      splitBottomModelSheet();
     } else {
+      log('index $index');
       title = 'Brower';
+      selectedIndex = index;
     }
     update();
   }
