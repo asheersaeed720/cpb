@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         title: 'CPB',
         debugShowCheckedModeBanner: false,
         theme: lightThemeData,
+        darkTheme: ThemeData.dark(),
         initialBinding: MainBinding(),
         initialRoute: SplashScreen.routeName,
         getPages: routes,

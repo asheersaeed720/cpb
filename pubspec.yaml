@@ -33,6 +33,7 @@ dependencies:
   path: ^1.8.0
   intl: ^0.17.0
   timeago: ^3.1.0
+  share_plus: ^4.0.4
   get_storage: ^2.0.3
   url_launcher: ^6.1.0
   fluttertoast: ^8.0.8
@@ -78,7 +79,8 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - assets/dummy-images/
+    - assets/json/
+    # - assets/dummy-images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

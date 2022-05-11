@@ -6,6 +6,7 @@ import 'package:cpb/src/home/home_screen.dart';
 import 'package:cpb/src/library/library_screen.dart';
 import 'package:cpb/src/note/note_screen.dart';
 import 'package:cpb/src/notification/notification_screen.dart';
+import 'package:cpb/src/setting/setting_screen.dart';
 import 'package:cpb/src/split_bottom_sheet.dart';
 import 'package:cpb/src/store/store_screen.dart';
 import 'package:cpb/utils/constants.dart';
@@ -217,6 +218,7 @@ class TabScreen extends StatelessWidget {
               ),
               onTap: () {
                 Get.back();
+                Get.toNamed(SettingScreen.routeName);
               },
             ),
             const Divider(color: Colors.white),

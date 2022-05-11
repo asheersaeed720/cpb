@@ -1,5 +1,6 @@
 import 'package:cpb/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -85,7 +86,9 @@ class HomeScreen extends StatelessWidget {
             const Color(0xFFeef6ff),
           ),
         ),
-        onPressed: () {},
+        onPressed: () async {
+          await Share.share('check out my website https://example.com');
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
