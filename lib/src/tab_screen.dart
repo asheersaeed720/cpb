@@ -48,7 +48,7 @@ class TabScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[
-      const BibleScreen(),
+      BibleScreen(),
       NoteScreen(),
       const HomeScreen(),
       const HomeScreen(),

@@ -1,138 +1,164 @@
 import 'dart:ui';
 
-import 'package:cpb/src/bible/views/bible_detail_screen.dart';
+import 'package:cpb/src/bible/bible.dart';
+import 'package:cpb/src/bible/bible_controller.dart';
 import 'package:cpb/utils/constants.dart';
 import 'package:cpb/widgets/custom_text_field.dart';
+import 'package:cpb/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BibleScreen extends StatelessWidget {
-  const BibleScreen({Key? key}) : super(key: key);
+  BibleScreen({Key? key}) : super(key: key);
+
+  final _bibleController = Get.put(BibleController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 14.0),
-            children: [
-              Text('Apologetics', style: kTitleStyle),
-              const SizedBox(height: 10.0),
-              ListTile(
-                onTap: () => Get.toNamed(BibleDetailScreen.routeName),
-                contentPadding: EdgeInsets.zero,
-                leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(
-                    'assets/images/no_img_available.jpg',
-                    width: 120.0,
-                    height: 120.0,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                title: Text(
-                  'Lorem ipsum dolar sit amet consectetur adipiscing',
-                  style: kBodyStyle.copyWith(fontSize: 14.0),
-                ),
-                subtitle: Column(
-                  children: [
-                    Row(
-                      children: const [
-                        Icon(Icons.date_range, size: 16.0, color: Colors.grey),
-                        SizedBox(width: 8.0),
-                        Text('Monday, 2 Dec 2022'),
-                      ],
-                    ),
-                    Row(
-                      children: const [
-                        Icon(Icons.comment, size: 16.0, color: Colors.grey),
-                        SizedBox(width: 8.0),
-                        Text('01'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 2.0),
-              const Divider(),
-              const SizedBox(height: 2.0),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(
-                    'assets/images/no_img_available.jpg',
-                    width: 120.0,
-                    height: 120.0,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                title: Text(
-                  'Lorem ipsum dolar sit amet consectetur adipiscing',
-                  style: kBodyStyle.copyWith(fontSize: 14.0),
-                ),
-                subtitle: Column(
-                  children: [
-                    Row(
-                      children: const [
-                        Icon(Icons.date_range, size: 16.0, color: Colors.grey),
-                        SizedBox(width: 8.0),
-                        Text('Monday, 2 Dec 2022'),
-                      ],
-                    ),
-                    Row(
-                      children: const [
-                        Icon(Icons.comment, size: 16.0, color: Colors.grey),
-                        SizedBox(width: 8.0),
-                        Text('01'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 2.0),
-              const Divider(),
-              const SizedBox(height: 2.0),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(
-                    'assets/images/no_img_available.jpg',
-                    width: 120.0,
-                    height: 120.0,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                title: Text(
-                  'Lorem ipsum dolar sit amet consectetur adipiscing',
-                  style: kBodyStyle.copyWith(fontSize: 14.0),
-                ),
-                subtitle: Column(
-                  children: [
-                    Row(
-                      children: const [
-                        Icon(Icons.date_range, size: 16.0, color: Colors.grey),
-                        SizedBox(width: 8.0),
-                        Text('Monday, 2 Dec 2022'),
-                      ],
-                    ),
-                    Row(
-                      children: const [
-                        Icon(Icons.comment, size: 16.0, color: Colors.grey),
-                        SizedBox(width: 8.0),
-                        Text('01'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          _buildBottomSheetView(),
-        ],
+      body: GetBuilder<BibleController>(
+        builder: (_) => Stack(
+          clipBehavior: Clip.none,
+          children: [
+            FutureBuilder<List<BibleModel>>(
+                future: _bibleController.readJson(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasError) {
+                    List<BibleModel> bibleData = snapshot.data ?? [];
+                    List fieldList = [];
+
+                    for (var element in bibleData) {
+                      fieldList.add(element.field);
+                    }
+
+                    ListView.builder(
+                      itemCount: fieldList.length,
+                      itemBuilder: ((context, i) => Text(fieldList[i])),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  }
+                  return const LoadingWidget();
+                }),
+            // ListView(
+            //   padding: const EdgeInsets.symmetric(horizontal: 14.0),
+            //   children: [
+            //     Text('Apologetics', style: kTitleStyle),
+            //     const SizedBox(height: 10.0),
+            //     ListTile(
+            //       onTap: () => Get.toNamed(BibleDetailScreen.routeName),
+            //       contentPadding: EdgeInsets.zero,
+            //       leading: ClipRRect(
+            //         borderRadius: BorderRadius.circular(8.0),
+            //         child: Image.asset(
+            //           'assets/images/no_img_available.jpg',
+            //           width: 120.0,
+            //           height: 120.0,
+            //           fit: BoxFit.cover,
+            //         ),
+            //       ),
+            //       title: Text(
+            //         'Lorem ipsum dolar sit amet consectetur adipiscing',
+            //         style: kBodyStyle.copyWith(fontSize: 14.0),
+            //       ),
+            //       subtitle: Column(
+            //         children: [
+            //           Row(
+            //             children: const [
+            //               Icon(Icons.date_range, size: 16.0, color: Colors.grey),
+            //               SizedBox(width: 8.0),
+            //               Text('Monday, 2 Dec 2022'),
+            //             ],
+            //           ),
+            //           Row(
+            //             children: const [
+            //               Icon(Icons.comment, size: 16.0, color: Colors.grey),
+            //               SizedBox(width: 8.0),
+            //               Text('01'),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     const SizedBox(height: 2.0),
+            //     const Divider(),
+            //     const SizedBox(height: 2.0),
+            //     ListTile(
+            //       contentPadding: EdgeInsets.zero,
+            //       leading: ClipRRect(
+            //         borderRadius: BorderRadius.circular(8.0),
+            //         child: Image.asset(
+            //           'assets/images/no_img_available.jpg',
+            //           width: 120.0,
+            //           height: 120.0,
+            //           fit: BoxFit.cover,
+            //         ),
+            //       ),
+            //       title: Text(
+            //         'Lorem ipsum dolar sit amet consectetur adipiscing',
+            //         style: kBodyStyle.copyWith(fontSize: 14.0),
+            //       ),
+            //       subtitle: Column(
+            //         children: [
+            //           Row(
+            //             children: const [
+            //               Icon(Icons.date_range, size: 16.0, color: Colors.grey),
+            //               SizedBox(width: 8.0),
+            //               Text('Monday, 2 Dec 2022'),
+            //             ],
+            //           ),
+            //           Row(
+            //             children: const [
+            //               Icon(Icons.comment, size: 16.0, color: Colors.grey),
+            //               SizedBox(width: 8.0),
+            //               Text('01'),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     const SizedBox(height: 2.0),
+            //     const Divider(),
+            //     const SizedBox(height: 2.0),
+            //     ListTile(
+            //       contentPadding: EdgeInsets.zero,
+            //       leading: ClipRRect(
+            //         borderRadius: BorderRadius.circular(8.0),
+            //         child: Image.asset(
+            //           'assets/images/no_img_available.jpg',
+            //           width: 120.0,
+            //           height: 120.0,
+            //           fit: BoxFit.cover,
+            //         ),
+            //       ),
+            //       title: Text(
+            //         'Lorem ipsum dolar sit amet consectetur adipiscing',
+            //         style: kBodyStyle.copyWith(fontSize: 14.0),
+            //       ),
+            //       subtitle: Column(
+            //         children: [
+            //           Row(
+            //             children: const [
+            //               Icon(Icons.date_range, size: 16.0, color: Colors.grey),
+            //               SizedBox(width: 8.0),
+            //               Text('Monday, 2 Dec 2022'),
+            //             ],
+            //           ),
+            //           Row(
+            //             children: const [
+            //               Icon(Icons.comment, size: 16.0, color: Colors.grey),
+            //               SizedBox(width: 8.0),
+            //               Text('01'),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            _buildBottomSheetView(),
+          ],
+        ),
       ),
     );
   }
