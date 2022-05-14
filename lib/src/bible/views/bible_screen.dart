@@ -15,31 +15,33 @@ class BibleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _bibleController.readJson();
     return Scaffold(
       body: GetBuilder<BibleController>(
         builder: (_) => Stack(
           clipBehavior: Clip.none,
           children: [
             FutureBuilder<List<BibleModel>>(
-                future: _bibleController.readJson(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasError) {
-                    List<BibleModel> bibleData = snapshot.data ?? [];
-                    List fieldList = [];
+              future: _bibleController.readJson(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasError) {
+                  List<BibleModel> bibleData = snapshot.data ?? [];
+                  List fieldList = [];
 
-                    for (var element in bibleData) {
-                      fieldList.add(element.field);
-                    }
-
-                    ListView.builder(
-                      itemCount: fieldList.length,
-                      itemBuilder: ((context, i) => Text(fieldList[i])),
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
+                  for (var element in bibleData) {
+                    fieldList.add(element.field);
                   }
-                  return const LoadingWidget();
-                }),
+
+                  ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: ((context, i) => Text(fieldList[i])),
+                  );
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
+                return const LoadingWidget();
+              },
+            ),
             // ListView(
             //   padding: const EdgeInsets.symmetric(horizontal: 14.0),
             //   children: [

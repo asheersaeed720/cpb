@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cpb/src/auth/auth_controller.dart';
 import 'package:cpb/src/bible/views/bible_screen.dart';
 import 'package:cpb/src/home/home_screen.dart';
@@ -18,7 +16,6 @@ class TabController extends GetxController {
   String title = 'Home';
 
   onItemTapped(int index) {
-    log('index $index');
     if (index == 0) {
       title = 'Bible';
       selectedIndex = index;
@@ -29,10 +26,8 @@ class TabController extends GetxController {
       title = 'Home';
       selectedIndex = index;
     } else if (index == 3) {
-      // title = 'Split';
       splitBottomModelSheet();
     } else {
-      log('index $index');
       title = 'Brower';
       selectedIndex = index;
     }

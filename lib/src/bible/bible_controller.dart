@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:cpb/src/bible/bible.dart';
 import 'package:cpb/src/network_manager.dart';
@@ -24,7 +25,8 @@ class BibleController extends NetworkManager {
     try {
       final response = await rootBundle.loadString('assets/json/t_kjv.json');
       final data = await json.decode(response);
-      return (data as List).map((e) => BibleModel.fromJson(e)).toList();
+      log('data ${data.runtimeType}');
+      return (data['resultset']['row'] as List).map((e) => BibleModel.fromJson(e)).toList();
       // items = data["resultset"]['row'];
       // log('response $items');
     } catch (e) {

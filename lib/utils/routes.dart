@@ -8,6 +8,7 @@ import 'package:cpb/src/donation_screen.dart';
 import 'package:cpb/src/get_started_screen.dart';
 import 'package:cpb/src/library/library_screen.dart';
 import 'package:cpb/src/notification/notification_screen.dart';
+import 'package:cpb/src/reading/start_reading_screen.dart';
 import 'package:cpb/src/setting/setting_screen.dart';
 import 'package:cpb/src/splash_screen.dart';
 import 'package:cpb/src/store/store_screen.dart';
@@ -75,5 +76,9 @@ final List<GetPage<dynamic>> routes = [
   GetPage(
     name: SettingScreen.routeName,
     page: () => const SettingScreen(),
+  ),
+  GetPage(
+    name: StartReadingScreen.routeName,
+    page: () => const StartReadingScreen(),
   ),
 ];
